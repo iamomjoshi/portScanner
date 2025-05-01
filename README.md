@@ -19,7 +19,9 @@ portScanner is a visually engaging Python-based port scanner designed for cybers
 ---
 
 ## 🖥️ Screenshots
-
+<img src="./assets/image1.png">
+<img src="./assets/image2.png">
+<img src="./assets/image3.png">
 
 ## ⚙️ How It Works
 
