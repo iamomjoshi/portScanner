@@ -1,0 +1,159 @@
+
+import socket
+import sys
+import ipaddress
+import time
+import threading
+from concurrent.futures import ThreadPoolExecutor
+from queue import Queue
+
+# ANSI color codes for terminal output
+class Colors:
+    HEADER = '\033[95m'
+    BLUE = '\033[94m'
+    CYAN = '\033[96m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+def print_banner():
+    """Display a professional banner for the port scanner."""
+    banner = f"""
+{Colors.CYAN}{Colors.BOLD}╔═══════════════════════════════════════════════════════════╗
+║                   ADVANCED PORT SCANNER                    ║
+╚═══════════════════════════════════════════════════════════╝{Colors.ENDC}
+
+{Colors.BLUE}{Colors.BOLD}[*] Scan open ports on any IP address
+[*] Identify running services
+[*] Multi-threaded for faster scanning{Colors.ENDC}
+
+{Colors.YELLOW}Created by Om Joshi{Colors.ENDC}
+"""
+    print(banner)
+
+def validate_ip(ip):
+    """Validate if the provided string is a valid IP address."""
+    try:
+        ipaddress.ip_address(ip)
+        return True
+    except ValueError:
+        return False
+
+def validate_port_range(start, end):
+    """Validate if the port range is valid."""
+    if not (1 <= start <= 65535) or not (1 <= end <= 65535):
+        return False
+    if start > end:
+        return False
+    return True
+
+def get_service_name(port):
+    """Get the service name for a given port number."""
+    try:
+        service = socket.getservbyport(port)
+        return service
+    except:
+        return "unknown"
+
+def scan_port(ip, port, timeout=1):
+    """Scan a single port on the specified IP address."""
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(timeout)
+    result = sock.connect_ex((ip, port))
+    sock.close()
+    return port, result == 0
+
+def display_progress(current, total):
+    """Display a progress bar for the scanning process."""
+    bar_length = 40
+    progress = current / total
+    block = int(round(bar_length * progress))
+    progress_bar = f"{Colors.GREEN}[{'#' * block}{'-' * (bar_length - block)}]{Colors.ENDC}"
+    percent = round(progress * 100, 1)
+    sys.stdout.write(f"\r{Colors.BOLD}Progress: {progress_bar} {percent}% ({current}/{total} ports){Colors.ENDC}")
+    sys.stdout.flush()
+
+def main():
+    """Main function to run the port scanner."""
+    print_banner()
+    
+    # Get IP address
+    while True:
+        ip = input(f"{Colors.BOLD}{Colors.BLUE}[+] Enter the target IP address: {Colors.ENDC}")
+        if validate_ip(ip):
+            break
+        print(f"{Colors.RED}[!] Invalid IP address. Please try again.{Colors.ENDC}")
+    
+    # Get port range
+    while True:
+        try:
+            start_port = int(input(f"{Colors.BOLD}{Colors.BLUE}[+] Enter the starting port (1-65535): {Colors.ENDC}"))
+            end_port = int(input(f"{Colors.BOLD}{Colors.BLUE}[+] Enter the ending port (1-65535): {Colors.ENDC}"))
+            
+            if validate_port_range(start_port, end_port):
+                break
+            print(f"{Colors.RED}[!] Invalid port range. Ports must be between 1-65535 and start port must be less than or equal to end port.{Colors.ENDC}")
+        except ValueError:
+            print(f"{Colors.RED}[!] Please enter valid numbers for ports.{Colors.ENDC}")
+    
+    # Get scan speed/threads
+    while True:
+        try:
+            threads = int(input(f"{Colors.BOLD}{Colors.BLUE}[+] Enter number of threads (1-100, higher = faster): {Colors.ENDC}"))
+            if 1 <= threads <= 100:
+                break
+            print(f"{Colors.RED}[!] Please enter a number between 1 and 100.{Colors.ENDC}")
+        except ValueError:
+            print(f"{Colors.RED}[!] Please enter a valid number.{Colors.ENDC}")
+    
+    print(f"\n{Colors.YELLOW}{Colors.BOLD}[*] Starting scan on {ip} from port {start_port} to {end_port} with {threads} threads...{Colors.ENDC}\n")
+    
+    # Prepare for scanning
+    ports_to_scan = list(range(start_port, end_port + 1))
+    total_ports = len(ports_to_scan)
+    open_ports = []
+    scanned_count = 0
+    
+    # Start scanning with progress updates
+    print(f"{Colors.CYAN}[*] Scanning in progress...{Colors.ENDC}")
+    
+    with ThreadPoolExecutor(max_workers=threads) as executor:
+        future_to_port = {executor.submit(scan_port, ip, port): port for port in ports_to_scan}
+        
+        for future in future_to_port:
+            port, is_open = future.result()
+            scanned_count += 1
+            
+            if is_open:
+                open_ports.append(port)
+            
+            display_progress(scanned_count, total_ports)
+    
+    # Display results
+    print("\n")
+    if open_ports:
+        print(f"\n{Colors.GREEN}{Colors.BOLD}[+] Scan completed! Found {len(open_ports)} open ports:{Colors.ENDC}")
+        print(f"\n{Colors.CYAN}{Colors.BOLD}{'PORT':<10}{'STATE':<10}{'SERVICE':<15}{Colors.ENDC}")
+        print(f"{Colors.CYAN}{Colors.BOLD}{'-'*35}{Colors.ENDC}")
+        
+        for port in sorted(open_ports):
+            service = get_service_name(port)
+            print(f"{Colors.GREEN}{port:<10}{'open':<10}{service:<15}{Colors.ENDC}")
+    else:
+        print(f"\n{Colors.YELLOW}{Colors.BOLD}[!] No open ports found in the specified range.{Colors.ENDC}")
+    
+    print(f"\n{Colors.BLUE}{Colors.BOLD}[*] Thank you for using Advanced Port Scanner by Om Joshi{Colors.ENDC}")
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print(f"\n\n{Colors.RED}[!] Scan interrupted by user.{Colors.ENDC}")
+        print(f"\n{Colors.BLUE}{Colors.BOLD}[*] Thank you for using Advanced Port Scanner by Om Joshi{Colors.ENDC}")
+        sys.exit(0)
+    except Exception as e:
+        print(f"\n{Colors.RED}[!] An error occurred: {str(e)}{Colors.ENDC}")
+        sys.exit(
