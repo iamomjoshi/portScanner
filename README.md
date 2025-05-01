@@ -18,12 +18,12 @@ portScanner is a visually engaging Python-based port scanner designed for cybers
 
 ---
 
-## 🖥️ Screenshots
+## Screenshots
 <img src="./assets/image1.png">
 <img src="./assets/image2.png">
 <img src="./assets/image3.png">
 
-## ⚙️ How It Works
+## How It Works
 
 1. You enter the **target IP** and **port range**.
 2. The scanner validates inputs and begins scanning using sockets.
