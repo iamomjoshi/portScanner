@@ -1,5 +1,5 @@
 
-# 🌐 portScanner
+# portScanner
 
 > 🔍 **A Port Scanning Script in Python**
 
@@ -42,6 +42,7 @@ portScanner is a visually engaging Python-based port scanner designed for cybers
 ```bash
 git clone https://github.com/iamomjoshi/portScanner.git
 cd portScanner
+pip install -r requirements.txt
 python3 portscanner.py
 ```
 
@@ -50,14 +51,16 @@ python3 portscanner.py
 ## 📁 File Structure
 
 ```
-📂 PortScannerFX/
+📂 portScanner/
+├── LICENSE            # License
 ├── portscanner.py     # Main script
 ├── README.md          # Project documentation
+├── requirements.txt   # Requirements
 ```
 
 ---
 
-## 📚 Usage
+## Usage
 
 Simply run the script and follow the on-screen prompts:
 
@@ -76,8 +79,8 @@ Sit back and enjoy the show 🎭
 
 ## 🧑‍💻 Author
 
-**Om Ketan Joshi**  
-Cybersecurity Enthusiast | Python Developer  
+**Om Joshi**  
+Cybersecurity Enthusiast | Network Engineer  
 📧 omjoshi1k@gmail.com  
 🔗 [LinkedIn]([https://linkedin.com/in/omketanjoshi](https://www.linkedin.com/in/om-joshi-327bb8314/))
 
@@ -94,5 +97,3 @@ Cybersecurity Enthusiast | Python Developer
 If you like this project, consider giving it a ⭐ on GitHub and sharing it with your friends and classmates!
 
 ---
-
-Would you like me to generate a matching `LICENSE` file or `requirements.txt` too?
