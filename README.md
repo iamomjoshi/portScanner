@@ -32,14 +32,14 @@ portScanner is a visually engaging Python-based port scanner designed for cybers
 
 ---
 
-## 🛠️ Installation
+## Installation
 
-### 🔧 Requirements
+### Requirements
 
 - Python 3.6+
 - Works on Linux, macOS, and Windows (with minor tweaks)
 
-### 📦 Setup
+### Setup
 
 ```bash
 git clone https://github.com/iamomjoshi/portScanner.git
@@ -50,7 +50,7 @@ python3 portscanner.py
 
 ---
 
-## 📁 File Structure
+## File Structure
 
 ```
 📂 portScanner/
@@ -75,26 +75,24 @@ You will be asked to enter:
 - Target IP Address
 - Port Range (e.g., 20-100)
 
-Sit back and enjoy the show 🎭
-
 ---
 
-## 🧑‍💻 Author
+## Author
 
 **Om Joshi**  
 Cybersecurity Enthusiast | Network Engineer  
 📧 omjoshi1k@gmail.com  
-🔗 [LinkedIn]([https://linkedin.com/in/omketanjoshi](https://www.linkedin.com/in/om-joshi-327bb8314/))
+🔗 [LinkedIn]((https://www.linkedin.com/in/om-joshi-327bb8314/))
 
 ---
 
-## 🛡️ Disclaimer
+## Disclaimer
 
 > This tool is **intended for educational and ethical use only**. Do not use it on networks without permission. The author is not responsible for any misuse.
 
 ---
 
-## ⭐ Show Your Support
+## Show Your Support
 
 If you like this project, consider giving it a ⭐ on GitHub and sharing it with your friends and classmates!
 
