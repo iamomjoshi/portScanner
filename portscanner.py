@@ -72,12 +72,12 @@ def print_fancy_banner():
     print(banner_art)
     
     # Animated tagline
-    animate_text(f"{Colors.YELLOW}{Colors.BOLD}⚡ ADVANCED NETWORK RECONNAISSANCE TOOL ⚡{Colors.ENDC}", Colors.YELLOW, 0.01)
+    animate_text(f"{Colors.YELLOW}{Colors.BOLD}⚡ PORT SCANNING SCRIPT ⚡{Colors.ENDC}", Colors.YELLOW, 0.01)
     print()
     
     # Feature list with animation
     features = [
-        f"{Colors.GREEN}✓ {Colors.BLUE}Multi-threaded scanning for lightning-fast results",
+        f"{Colors.GREEN}✓ {Colors.BLUE}Multi-threaded scanning for fast results",
         f"{Colors.GREEN}✓ {Colors.BLUE}Service detection for open ports",
         f"{Colors.GREEN}✓ {Colors.BLUE}Interactive interface with real-time progress",
         f"{Colors.GREEN}✓ {Colors.BLUE}Comprehensive port analysis"
@@ -89,8 +89,12 @@ def print_fancy_banner():
     
     # Creator credit with special styling
     print()
-    creator_text = f"{Colors.BG_BLUE}{Colors.WHITE}{Colors.BOLD}  Created by Om Joshi  {Colors.ENDC}"
+    creator_text = f"{Colors.YELLOW}{Colors.WHITE}{Colors.BOLD}  Created by Om Joshi  {Colors.ENDC}"
     print(f"{' ' * ((80 - len('Created by Om Joshi') - 4) // 2)}{creator_text}")
+
+    print()
+    creator_text = f"{Colors.BG_BLUE}{Colors.WHITE}{Colors.BOLD}  https://github.com/iamomjoshi/portScanner {Colors.ENDC}"
+    print(f"{' ' * ((80 - len('https://github.com/iamomjoshi/portScanner') - 4) // 2)}{creator_text}")
     print("\n" + "=" * 80 + "\n")
 
 def animated_loading(duration=3):
@@ -234,18 +238,18 @@ def show_scan_summary(start_time, end_time, scanned_ports, open_ports, ip):
     duration = end_time - start_time
     ports_per_second = scanned_ports / duration if duration > 0 else 0
     
-    print(f"\n{Colors.CYAN}{Colors.BOLD}📊 SCAN SUMMARY{Colors.ENDC}")
+    print(f"\n{Colors.CYAN}{Colors.BOLD} SCAN SUMMARY{Colors.ENDC}")
     print(f"{Colors.BLUE}{'=' * 40}{Colors.ENDC}")
-    print(f"{Colors.YELLOW}🎯 Target:{Colors.ENDC} {Colors.WHITE}{ip}{Colors.ENDC}")
-    print(f"{Colors.YELLOW}⏱️ Duration:{Colors.ENDC} {Colors.WHITE}{duration:.2f} seconds{Colors.ENDC}")
-    print(f"{Colors.YELLOW}🔍 Ports Scanned:{Colors.ENDC} {Colors.WHITE}{scanned_ports}{Colors.ENDC}")
-    print(f"{Colors.YELLOW}🚪 Open Ports:{Colors.ENDC} {Colors.WHITE}{len(open_ports)}{Colors.ENDC}")
-    print(f"{Colors.YELLOW}⚡ Scan Rate:{Colors.ENDC} {Colors.WHITE}{ports_per_second:.2f} ports/second{Colors.ENDC}")
+    print(f"{Colors.YELLOW} Target:{Colors.ENDC} {Colors.WHITE}{ip}{Colors.ENDC}")
+    print(f"{Colors.YELLOW} Duration:{Colors.ENDC} {Colors.WHITE}{duration:.2f} seconds{Colors.ENDC}")
+    print(f"{Colors.YELLOW} Ports Scanned:{Colors.ENDC} {Colors.WHITE}{scanned_ports}{Colors.ENDC}")
+    print(f"{Colors.YELLOW} Open Ports:{Colors.ENDC} {Colors.WHITE}{len(open_ports)}{Colors.ENDC}")
+    print(f"{Colors.YELLOW} Scan Rate:{Colors.ENDC} {Colors.WHITE}{ports_per_second:.2f} ports/second{Colors.ENDC}")
     print(f"{Colors.BLUE}{'=' * 40}{Colors.ENDC}")
 
 def show_menu():
     """Display the main menu with options."""
-    print(f"\n{Colors.CYAN}{Colors.BOLD}📋 MAIN MENU{Colors.ENDC}")
+    print(f"\n{Colors.CYAN}{Colors.BOLD} MAIN MENU{Colors.ENDC}")
     print(f"{Colors.BLUE}{'=' * 40}{Colors.ENDC}")
     print(f"{Colors.YELLOW}1.{Colors.ENDC} {Colors.WHITE}Start New Scan{Colors.ENDC}")
     print(f"{Colors.YELLOW}2.{Colors.ENDC} {Colors.WHITE}About{Colors.ENDC}")
@@ -258,7 +262,7 @@ def show_menu():
 def show_about():
     """Display information about the port scanner."""
     clear_screen()
-    print(f"\n{Colors.CYAN}{Colors.BOLD}ℹ️ ABOUT THIS TOOL{Colors.ENDC}")
+    print(f"\n{Colors.CYAN}{Colors.BOLD} ABOUT THIS TOOL{Colors.ENDC}")
     print(f"{Colors.BLUE}{'=' * 60}{Colors.ENDC}")
     
     about_text = [
@@ -282,7 +286,7 @@ def show_about():
 def perform_scan():
     """Perform the port scanning operation."""
     clear_screen()
-    print(f"\n{Colors.CYAN}{Colors.BOLD}🔍 NEW SCAN{Colors.ENDC}")
+    print(f"\n{Colors.CYAN}{Colors.BOLD} NEW SCAN{Colors.ENDC}")
     print(f"{Colors.BLUE}{'=' * 40}{Colors.ENDC}")
     
     # Get IP address with validation
@@ -365,7 +369,7 @@ def main():
             elif choice == "2":
                 show_about()
             elif choice == "3":
-                print(f"\n{Colors.GREEN}{Colors.BOLD}Thank you for using the Advanced Port Scanner by Om Joshi!{Colors.ENDC}")
+                print(f"\n{Colors.GREEN}{Colors.BOLD}Thank you for using the portScanner by Om Joshi!{Colors.ENDC}")
                 break
             else:
                 print(f"{Colors.RED}{Colors.BOLD}[!] Invalid choice. Please select a valid option.{Colors.ENDC}")
@@ -373,7 +377,7 @@ def main():
     
     except KeyboardInterrupt:
         print(f"\n\n{Colors.RED}{Colors.BOLD}[!] Scan interrupted by user.{Colors.ENDC}")
-        print(f"\n{Colors.GREEN}{Colors.BOLD}Thank you for using the Advanced Port Scanner by Om Joshi!{Colors.ENDC}")
+        print(f"\n{Colors.GREEN}{Colors.BOLD}Thank you for using the portScanner by Om Joshi!{Colors.ENDC}")
         sys.exit(0)
     except Exception as e:
         print(f"\n{Colors.RED}{Colors.BOLD}[!] An error occurred: {str(e)}{Colors.ENDC}")
