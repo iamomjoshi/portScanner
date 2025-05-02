@@ -266,7 +266,7 @@ def show_about():
     print(f"{Colors.BLUE}{'=' * 60}{Colors.ENDC}")
     
     about_text = [
-        f"{Colors.WHITE}The Advanced Port Scanner is a powerful network reconnaissance tool",
+        f"{Colors.WHITE}portScanner is a python based port scanning tool",
         f"designed to identify open ports and services on target systems.",
         f"",
         f"This tool uses multi-threading to perform rapid port scanning while",
