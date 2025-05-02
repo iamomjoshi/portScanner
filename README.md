@@ -81,9 +81,7 @@ You will be asked to enter:
 
 **Om Joshi**  
 Cybersecurity Enthusiast | Network Engineer  
-📧 omjoshi1k@gmail.com  
-🔗 [LinkedIn]((https://www.linkedin.com/in/om-joshi-327bb8314/))
-
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/om-joshi-327bb8314) [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:omjoshi1k@gmail.com) 
 ---
 
 ## Disclaimer
